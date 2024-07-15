@@ -1,0 +1,69 @@
+---
+title: "Introduction"
+date: "2024-06-21"
+---
+
+# Problem Statement
+
+The objective of this project is to develop a comprehensive framework for evaluating the performance of Large Language Models (LLMs) using the RAGAS framework. The framework integrates DSPy for prompt optimization and Prometheus for response evaluation, aiming to standardize the assessment process of different LLMs. This framework addresses the challenges of prompt variability, real-time performance assessment, NLP evaluation, and hallucination in LLMs, thereby providing a versatile and reliable solution for comparing LLM performances.
+
+# Approach
+
+1. **Prompt Optimization with DSPy**:
+    - DSPy takes an initial prompt and optimizes it by generating multiple variations of the same prompt.
+    - These variations are then aggregated to create an optimized prompt set.
+
+2. **Response Generation using LLMs**:
+    - The optimized prompts are provided as inputs to an LLM using the RAG framework.
+    - The LLM generates responses based on the database and the provided prompts.
+
+3. **Response Evaluation with Prometheus**:
+    - Prometheus evaluates the responses from the LLM.
+    - The evaluation process includes providing ground truth data for accurate assessment.
+
+4. **Performance Standardization and Scoring**:
+    - By using optimized prompt inputs and ground truth evaluations, the framework removes the variability in performance assessments caused by prompt differences.
+    - A scoring or metric system is implemented to quantify the accuracy of the evaluation process. This score provides a clear indication of how well the LLM responses align with the ground truth.
+
+# Addressing Additional Problems
+
+In addition to the primary goal of evaluating LLMs, this framework addresses several other issues:
+
+1. **Comparison among Documents**:
+    - **Problem**: Evaluating how similar in logic and meaning two paraphrased documents is a widely tackled issue.
+    - **Solution**: This framework can be used to compare the capability of LLMs in understanding and debugging similar logical content despite different textual structures.
+
+2. **Hallucination**:
+    - **Problem**: Hallucinations can be viewed either as a bug or a feature based on the application.
+    - **Solution**: By using the RAG framework and the defined pipeline from the above "approach", hallucinations are taken care of, which help the LLM provide factually correct and consistent information by eliminating coherent but factually inconsistent responses. Adding explainability to the model also helps reduce hallucinations since the LLM is directed to explain its thought process behind the decision.
+
+3. **Subjective Prompts Between Designer**:
+    - **Problem**: Different designer use different prompts, and there's no standard logic behind the prompt variations.
+    - **Solution**: Prompt optimization makes use of DSPy to find the most effective one.
+
+# A High-Level Expected Development Workflow
+
+Building the defined framework from ground-up would entail the following stages:
+
+1. **Baseline Model (Grammar Correction)**:
+    - Start with basic grammar correction tasks to understand the fundamental capabilities of LLMs.
+    - The model would take on the role of a judge which would be constrained to generate a label of 0 (no) or 1 (yes) to indicate the correctness of the given input.
+    - Since this is modeled as a binary classifier, any metric can be used to evaluate the model (Such as recall, accuracy, precision)
+    - Experimenting with diverse prompts to identify the one that works the best would optimize the model. Even though this is still subjective, this would work well for a baseline model to start with.
+
+2. **DSPy Framework**:
+    - Learn how to use DSPy for prompt optimization. Understand the process of generating and aggregating multiple prompt variations.
+    - Additonally, at a later stage, DSPy can be replaced with a much simpler model which performs the required prompt optimization.
+
+3. **RAGAS Framework**:
+    - Get familiar with the RAGAS framework for RAG-based-response evaluation. Learn how to use the available tools for evaluation.
+
+4. **Integration (RAGAS & DSPy)**:
+    - Combine the tools from DSPy and RAGAS to create a cohesive system where optimized prompts generated from DSPy are used to generate LLM responses, which are then evaluated by RAGAS accurately.
+
+5. **User-Supplied Problem & Data**:
+    - Users to supply their own problem statement and data to the framework. This will help in personalizing the learning experience along with testing the framework on diverse problem statements and datasets.
+
+# Conclusion
+
+This framework provides a consistent and reliable method for evaluating LLMs by integrating prompt optimization and response evaluation tools. It addresses critical issues such as real-time performance assessment, Natural Language comparison between documents, and subjective prompt handling. By standardizing the evaluation process with optimized prompts and ground truth data, this approach enhances the reliability and accuracy of LLM assessments, offering a valuable tool for researchers and developers in the field of natural language processing.
